@@ -116,18 +116,19 @@ export default function KakaoMap({
       }
     };
 
-    // 카카오맵 SDK 로드 대기
+    // 카카오맵 SDK 로드 대기 (최대 10초)
     const checkKakao = setInterval(() => {
-      if (window.kakao?.maps) {
+      if (window.kakao?.maps?.load) {
         clearInterval(checkKakao);
+        clearTimeout(timeout);
         initMap();
       }
-    }, 100);
+    }, 200);
 
     const timeout = setTimeout(() => {
       clearInterval(checkKakao);
-      if (!window.kakao?.maps) setMapError(true);
-    }, 5000);
+      if (!window.kakao?.maps?.load) setMapError(true);
+    }, 10000);
 
     return () => {
       clearInterval(checkKakao);
@@ -143,5 +144,5 @@ export default function KakaoMap({
     );
   }
 
-  return <div ref={mapRef} className="w-full h-full" />;
+  return <div ref={mapRef} style={{ width: "100%", height: "50vh" }} />;
 }
