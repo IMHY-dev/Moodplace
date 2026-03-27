@@ -118,7 +118,7 @@ export default function KakaoMap({
 
     // 카카오맵 SDK 로드 대기 (최대 10초)
     const checkKakao = setInterval(() => {
-      if (window.kakao?.maps?.load) {
+      if (typeof window.kakao?.maps?.load === "function") {
         clearInterval(checkKakao);
         clearTimeout(timeout);
         initMap();
@@ -127,7 +127,7 @@ export default function KakaoMap({
 
     const timeout = setTimeout(() => {
       clearInterval(checkKakao);
-      if (!window.kakao?.maps?.load) setMapError(true);
+      if (typeof window.kakao?.maps?.load !== "function") setMapError(true);
     }, 10000);
 
     return () => {
