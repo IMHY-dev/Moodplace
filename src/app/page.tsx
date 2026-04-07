@@ -21,37 +21,49 @@ const VIBES: { value: Vibe; label: string; emoji: string }[] = [
 
 const ACTIVITIES: { value: Activity; label: string; emoji: string }[] = [
   { value: "걷기", label: "걷고 싶어", emoji: "🚶" },
-  { value: "카페", label: "카페 가고 싶어", emoji: "☕" },
-  { value: "맛집", label: "맛있는 거 먹고 싶어", emoji: "🍽" },
-  { value: "쇼핑", label: "쇼핑하고 싶어", emoji: "🛍" },
-  { value: "문화", label: "문화 경험하고 싶어", emoji: "🎨" },
+  { value: "카페", label: "카페", emoji: "☕" },
+  { value: "맛집", label: "맛집", emoji: "🍽" },
+  { value: "쇼핑", label: "쇼핑", emoji: "🛍" },
+  { value: "문화", label: "문화 경험", emoji: "🎨" },
 ];
 
-const STEPS = ["누구랑?", "어떤 느낌?", "뭐 하고 싶어?"];
+function Chip({
+  emoji,
+  label,
+  selected,
+  onClick,
+}: {
+  emoji: string;
+  label: string;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-1.5 px-4 py-2 rounded-full border-2 text-sm font-medium transition-all whitespace-nowrap ${
+        selected
+          ? "border-black bg-black text-white"
+          : "border-zinc-200 text-zinc-700 hover:border-zinc-400"
+      }`}
+    >
+      <span>{emoji}</span>
+      <span>{label}</span>
+    </button>
+  );
+}
 
 export default function MoodInputPage() {
   const router = useRouter();
-  const [step, setStep] = useState(0);
+  const [query, setQuery] = useState("");
   const [companion, setCompanion] = useState<Companion | null>(null);
   const [vibe, setVibe] = useState<Vibe | null>(null);
   const [activity, setActivity] = useState<Activity | null>(null);
 
-  const handleCompanion = (v: Companion) => {
-    setCompanion(v);
-    setStep(1);
-  };
-
-  const handleVibe = (v: Vibe) => {
-    setVibe(v);
-    setStep(2);
-  };
-
-  const handleActivity = (v: Activity) => {
-    setActivity(v);
-  };
+  const canSubmit = companion && vibe && activity;
 
   const handleSubmit = () => {
-    if (!companion || !vibe || !activity) return;
+    if (!canSubmit) return;
     const params = new URLSearchParams({ companion, vibe, activity });
     router.push(`/recommend?${params.toString()}`);
   };
@@ -65,132 +77,81 @@ export default function MoodInputPage() {
           <p className="text-zinc-500">오늘 어떤 서울을 원해요?</p>
         </div>
 
-        {/* 스텝 인디케이터 */}
-        <div className="flex items-center gap-2 mb-10 justify-center">
-          {STEPS.map((label, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <button
-                onClick={() => i < step && setStep(i)}
-                className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                  i === step
-                    ? "text-black"
-                    : i < step
-                    ? "text-zinc-400 hover:text-zinc-600 cursor-pointer"
-                    : "text-zinc-300 cursor-default"
-                }`}
-              >
-                <span
-                  className={`w-5 h-5 rounded-full flex items-center justify-center text-xs ${
-                    i < step
-                      ? "bg-black text-white"
-                      : i === step
-                      ? "border-2 border-black text-black"
-                      : "border-2 border-zinc-200 text-zinc-300"
-                  }`}
-                >
-                  {i < step ? "✓" : i + 1}
-                </span>
-                {label}
-              </button>
-              {i < STEPS.length - 1 && (
-                <span className="text-zinc-200">—</span>
-              )}
-            </div>
-          ))}
+        {/* 검색창 */}
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="예: 조용하고 빈티지한 카페가 있는 동네"
+          className="w-full text-base border-b-2 border-zinc-200 focus:border-black outline-none pb-3 bg-transparent text-center transition-colors mb-10 placeholder:text-zinc-400"
+        />
+
+        {/* 누구랑? */}
+        <div className="mb-8">
+          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+            누구랑
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {COMPANIONS.map((c) => (
+              <Chip
+                key={c.value}
+                emoji={c.emoji}
+                label={c.label}
+                selected={companion === c.value}
+                onClick={() =>
+                  setCompanion(companion === c.value ? null : c.value)
+                }
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Step 0: 동행자 */}
-        {step === 0 && (
-          <div>
-            <p className="text-lg font-semibold mb-5 text-center">
-              누구랑 가요?
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-              {COMPANIONS.map(({ value, label, emoji }) => (
-                <button
-                  key={value}
-                  onClick={() => handleCompanion(value)}
-                  className="flex flex-col items-center justify-center gap-2 py-6 border-2 border-zinc-200 rounded-2xl hover:border-black hover:bg-zinc-50 transition-all"
-                >
-                  <span className="text-3xl">{emoji}</span>
-                  <span className="text-base font-medium">{label}</span>
-                </button>
-              ))}
-            </div>
+        {/* 어떤 느낌? */}
+        <div className="mb-8">
+          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+            어떤 느낌
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {VIBES.map((v) => (
+              <Chip
+                key={v.value}
+                emoji={v.emoji}
+                label={v.label}
+                selected={vibe === v.value}
+                onClick={() => setVibe(vibe === v.value ? null : v.value)}
+              />
+            ))}
           </div>
-        )}
+        </div>
 
-        {/* Step 1: 느낌 */}
-        {step === 1 && (
-          <div>
-            <p className="text-lg font-semibold mb-5 text-center">
-              어떤 느낌이에요?
-            </p>
-            <div className="flex flex-col gap-3">
-              {VIBES.map(({ value, label, emoji }) => (
-                <button
-                  key={value}
-                  onClick={() => handleVibe(value)}
-                  className="flex items-center gap-4 px-6 py-4 border-2 border-zinc-200 rounded-2xl hover:border-black hover:bg-zinc-50 transition-all text-left"
-                >
-                  <span className="text-2xl">{emoji}</span>
-                  <span className="text-base font-medium">{label}</span>
-                </button>
-              ))}
-            </div>
+        {/* 뭐 하고 싶어? */}
+        <div className="mb-10">
+          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+            뭐 하고 싶어
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {ACTIVITIES.map((a) => (
+              <Chip
+                key={a.value}
+                emoji={a.emoji}
+                label={a.label}
+                selected={activity === a.value}
+                onClick={() =>
+                  setActivity(activity === a.value ? null : a.value)
+                }
+              />
+            ))}
           </div>
-        )}
+        </div>
 
-        {/* Step 2: 행위 */}
-        {step === 2 && (
-          <div>
-            <p className="text-lg font-semibold mb-5 text-center">
-              뭐 하고 싶어요?
-            </p>
-            <div className="flex flex-col gap-3">
-              {ACTIVITIES.map(({ value, label, emoji }) => (
-                <button
-                  key={value}
-                  onClick={() => handleActivity(value)}
-                  className={`flex items-center gap-4 px-6 py-4 border-2 rounded-2xl transition-all text-left ${
-                    activity === value
-                      ? "border-black bg-zinc-50"
-                      : "border-zinc-200 hover:border-zinc-400 hover:bg-zinc-50"
-                  }`}
-                >
-                  <span className="text-2xl">{emoji}</span>
-                  <span className="text-base font-medium">{label}</span>
-                </button>
-              ))}
-            </div>
-
-            <button
-              onClick={handleSubmit}
-              disabled={!activity}
-              className="mt-8 w-full py-4 bg-black text-white rounded-2xl text-base font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors"
-            >
-              추천받기 →
-            </button>
-          </div>
-        )}
-
-        {/* 선택 요약 (step > 0) */}
-        {step > 0 && (
-          <div className="mt-6 flex flex-wrap gap-2 justify-center">
-            {companion && (
-              <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
-                {COMPANIONS.find((c) => c.value === companion)?.emoji}{" "}
-                {companion}
-              </span>
-            )}
-            {vibe && (
-              <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
-                {VIBES.find((v) => v.value === vibe)?.emoji}{" "}
-                {VIBES.find((v) => v.value === vibe)?.label}
-              </span>
-            )}
-          </div>
-        )}
+        {/* 추천받기 */}
+        <button
+          onClick={handleSubmit}
+          disabled={!canSubmit}
+          className="w-full py-4 bg-black text-white rounded-2xl text-base font-semibold disabled:opacity-25 disabled:cursor-not-allowed hover:bg-zinc-800 transition-colors"
+        >
+          추천받기 →
+        </button>
       </div>
     </main>
   );
