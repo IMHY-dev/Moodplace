@@ -12,6 +12,13 @@ export type Activity = "걷기" | "카페" | "맛집" | "쇼핑" | "문화";
 // A: 동행자
 export type Companion = "혼자" | "연인" | "친구" | "부모님";
 
+export interface RegionAxes {
+  에너지: 1 | 2 | 3; // 1=조용 2=보통 3=활기
+  힙함:   1 | 2 | 3; // 1=대중적 2=보통 3=큐레이션
+  문화감: 1 | 2 | 3; // 1=이국/글로벌 2=현대한국 3=전통/역사
+  자연:   1 | 2 | 3; // 1=도시 2=보통 3=자연/녹음
+}
+
 export interface Region {
   id: string;
   name: string;
@@ -23,6 +30,7 @@ export interface Region {
   center_lng: number;
   description: string;
   image_url: string;
+  axes: RegionAxes;
 }
 
 export interface Place {

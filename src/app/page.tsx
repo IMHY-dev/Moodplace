@@ -2,29 +2,21 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Companion, Vibe, Activity } from "@/lib/types";
+import type { Companion, Activity } from "@/lib/types";
 
 const COMPANIONS: { value: Companion; label: string; emoji: string }[] = [
-  { value: "혼자", label: "혼자", emoji: "🚶" },
-  { value: "연인", label: "연인", emoji: "💑" },
-  { value: "친구", label: "친구", emoji: "👯" },
+  { value: "혼자",   label: "혼자",   emoji: "🚶" },
+  { value: "연인",   label: "연인",   emoji: "💑" },
+  { value: "친구",   label: "친구",   emoji: "👯" },
   { value: "부모님", label: "부모님", emoji: "👨‍👩‍👧" },
 ];
 
-const VIBES: { value: Vibe; label: string; emoji: string }[] = [
-  { value: "조용히쉬고싶어", label: "조용히 쉬고 싶어", emoji: "🌿" },
-  { value: "숨겨진거찾고싶어", label: "숨겨진 거 찾고 싶어", emoji: "🔍" },
-  { value: "핫한데가고싶어", label: "핫한 데 가고 싶어", emoji: "⚡" },
-  { value: "분위기있는데", label: "분위기 있는 데", emoji: "🌹" },
-  { value: "이국감성", label: "이국 감성", emoji: "✈️" },
-];
-
 const ACTIVITIES: { value: Activity; label: string; emoji: string }[] = [
-  { value: "걷기", label: "걷고 싶어", emoji: "🚶" },
-  { value: "카페", label: "카페", emoji: "☕" },
-  { value: "맛집", label: "맛집", emoji: "🍽" },
-  { value: "쇼핑", label: "쇼핑", emoji: "🛍" },
-  { value: "문화", label: "문화 경험", emoji: "🎨" },
+  { value: "걷기", label: "걷고 싶어",     emoji: "🚶" },
+  { value: "카페", label: "카페",           emoji: "☕" },
+  { value: "맛집", label: "맛집",           emoji: "🍽" },
+  { value: "쇼핑", label: "쇼핑",           emoji: "🛍" },
+  { value: "문화", label: "문화 경험",       emoji: "🎨" },
 ];
 
 function Chip({
@@ -57,14 +49,14 @@ export default function MoodInputPage() {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [companion, setCompanion] = useState<Companion | null>(null);
-  const [vibe, setVibe] = useState<Vibe | null>(null);
   const [activity, setActivity] = useState<Activity | null>(null);
 
-  const canSubmit = companion && vibe && activity;
+  const canSubmit = companion && activity;
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    const params = new URLSearchParams({ companion, vibe, activity });
+    const params = new URLSearchParams({ companion, activity });
+    if (query.trim()) params.set("query", query.trim());
     router.push(`/recommend?${params.toString()}`);
   };
 
@@ -77,16 +69,22 @@ export default function MoodInputPage() {
           <p className="text-zinc-500">오늘 어떤 서울을 원해요?</p>
         </div>
 
-        {/* 검색창 */}
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="예: 조용하고 빈티지한 카페가 있는 동네"
-          className="w-full text-base border-b-2 border-zinc-200 focus:border-black outline-none pb-3 bg-transparent text-center transition-colors mb-10 placeholder:text-zinc-400"
-        />
+        {/* B: 느낌 자유 입력 */}
+        <div className="mb-10">
+          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+            어떤 느낌
+          </p>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+            placeholder="예: 조용하고 빈티지한, 이국적인, 자연 속에서 여유롭게"
+            className="w-full text-base border-b-2 border-zinc-200 focus:border-black outline-none pb-3 bg-transparent transition-colors placeholder:text-zinc-400"
+          />
+        </div>
 
-        {/* 누구랑? */}
+        {/* A: 누구랑 */}
         <div className="mb-8">
           <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
             누구랑
@@ -98,33 +96,13 @@ export default function MoodInputPage() {
                 emoji={c.emoji}
                 label={c.label}
                 selected={companion === c.value}
-                onClick={() =>
-                  setCompanion(companion === c.value ? null : c.value)
-                }
+                onClick={() => setCompanion(companion === c.value ? null : c.value)}
               />
             ))}
           </div>
         </div>
 
-        {/* 어떤 느낌? */}
-        <div className="mb-8">
-          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
-            어떤 느낌
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {VIBES.map((v) => (
-              <Chip
-                key={v.value}
-                emoji={v.emoji}
-                label={v.label}
-                selected={vibe === v.value}
-                onClick={() => setVibe(vibe === v.value ? null : v.value)}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* 뭐 하고 싶어? */}
+        {/* C: 뭐 하고 싶어 */}
         <div className="mb-10">
           <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
             뭐 하고 싶어
@@ -136,9 +114,7 @@ export default function MoodInputPage() {
                 emoji={a.emoji}
                 label={a.label}
                 selected={activity === a.value}
-                onClick={() =>
-                  setActivity(activity === a.value ? null : a.value)
-                }
+                onClick={() => setActivity(activity === a.value ? null : a.value)}
               />
             ))}
           </div>

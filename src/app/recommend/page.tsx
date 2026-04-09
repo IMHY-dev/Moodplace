@@ -3,15 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense, useMemo } from "react";
 import { recommendRegions } from "@/lib/recommend";
-import type { Companion, Vibe, Activity } from "@/lib/types";
-
-const VIBE_LABEL: Record<Vibe, string> = {
-  조용히쉬고싶어: "🌿 조용히 쉬고 싶어",
-  숨겨진거찾고싶어: "🔍 숨겨진 거 찾고 싶어",
-  핫한데가고싶어: "⚡ 핫한 데 가고 싶어",
-  분위기있는데: "🌹 분위기 있는 데",
-  이국감성: "✈️ 이국 감성",
-};
+import type { Companion, Activity } from "@/lib/types";
 
 const ACTIVITY_LABEL: Record<Activity, string> = {
   걷기: "🚶 걷기",
@@ -22,9 +14,9 @@ const ACTIVITY_LABEL: Record<Activity, string> = {
 };
 
 const COMPANION_LABEL: Record<Companion, string> = {
-  혼자: "🚶 혼자",
-  연인: "💑 연인",
-  친구: "👯 친구",
+  혼자:   "🚶 혼자",
+  연인:   "💑 연인",
+  친구:   "👯 친구",
   부모님: "👨‍👩‍👧 부모님",
 };
 
@@ -33,13 +25,13 @@ function RecommendContent() {
   const router = useRouter();
 
   const companion = searchParams.get("companion") as Companion | null;
-  const vibe = searchParams.get("vibe") as Vibe | null;
-  const activity = searchParams.get("activity") as Activity | null;
+  const activity  = searchParams.get("activity")  as Activity  | null;
+  const query     = searchParams.get("query") ?? "";
 
   const regions = useMemo(() => {
-    if (!companion || !vibe || !activity) return [];
-    return recommendRegions(companion, vibe, activity, 3);
-  }, [companion, vibe, activity]);
+    if (!companion || !activity) return [];
+    return recommendRegions(companion, activity, query, 3);
+  }, [companion, activity, query]);
 
   const handleRegionClick = (regionName: string, lat: number, lng: number) => {
     const params = new URLSearchParams({
@@ -50,7 +42,7 @@ function RecommendContent() {
     router.push(`/places?${params.toString()}`);
   };
 
-  if (!companion || !vibe || !activity) {
+  if (!companion || !activity) {
     return (
       <main className="flex flex-1 flex-col items-center justify-center px-6">
         <p className="text-zinc-500 mb-6">잘못된 접근이에요.</p>
@@ -88,11 +80,13 @@ function RecommendContent() {
             {COMPANION_LABEL[companion]}
           </span>
           <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
-            {VIBE_LABEL[vibe]}
-          </span>
-          <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
             {ACTIVITY_LABEL[activity]}
           </span>
+          {query && (
+            <span className="text-xs px-3 py-1.5 bg-zinc-700 text-white rounded-full">
+              ✨ {query}
+            </span>
+          )}
         </div>
 
         <h2 className="text-2xl font-bold mb-6">이런 동네는 어때요?</h2>
@@ -103,11 +97,7 @@ function RecommendContent() {
             <button
               key={region.id}
               onClick={() =>
-                handleRegionClick(
-                  region.name,
-                  region.center_lat,
-                  region.center_lng
-                )
+                handleRegionClick(region.name, region.center_lat, region.center_lng)
               }
               className="group relative w-full h-48 rounded-2xl overflow-hidden text-left border-2 border-transparent hover:border-black transition-all"
             >
@@ -116,9 +106,7 @@ function RecommendContent() {
 
               {/* 순위 */}
               <div className="absolute top-4 left-4 z-10">
-                <span className="text-xs font-bold text-white/60">
-                  #{i + 1}
-                </span>
+                <span className="text-xs font-bold text-white/60">#{i + 1}</span>
               </div>
 
               <div className="relative z-10 flex flex-col justify-end h-full p-6 text-white">

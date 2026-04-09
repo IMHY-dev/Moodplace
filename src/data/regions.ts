@@ -13,6 +13,7 @@ export const regions: Region[] = [
     center_lng: 126.9756,
     description: "덕수궁 돌담길을 따라 걷는 고즈넉한 역사 산책로",
     image_url: "/images/jeongdong.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 3, 자연: 2 },
   },
   {
     id: "jg-2",
@@ -25,6 +26,7 @@ export const regions: Region[] = [
     center_lng: 126.9861,
     description: "쇼핑과 먹거리가 가득한 서울의 대표 번화가",
     image_url: "/images/myeongdong.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 1, 자연: 1 },
   },
   {
     id: "jg-3",
@@ -37,6 +39,7 @@ export const regions: Region[] = [
     center_lng: 126.9906,
     description: "오래된 인쇄소 골목에 새로운 감각이 스며든 힙지로",
     image_url: "/images/euljiro.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 3, 자연: 1 },
   },
   {
     id: "jg-4",
@@ -49,6 +52,7 @@ export const regions: Region[] = [
     center_lng: 127.0076,
     description: "떡볶이 골목과 중앙시장이 공존하는 진짜 서울",
     image_url: "/images/sindang.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "jg-5",
@@ -61,6 +65,7 @@ export const regions: Region[] = [
     center_lng: 126.9763,
     description: "500년 역사의 전통시장, 없는 것 없는 도깨비 시장",
     image_url: "/images/namdaemun.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 3, 자연: 1 },
   },
   {
     id: "jg-6",
@@ -73,6 +78,7 @@ export const regions: Region[] = [
     center_lng: 126.9806,
     description: "남산 둘레길과 서울 전경이 펼쳐지는 낭만 코스",
     image_url: "/images/namsan.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 3, 자연: 3 },
   },
   {
     id: "jg-7",
@@ -85,6 +91,7 @@ export const regions: Region[] = [
     center_lng: 126.9940,
     description: "한옥마을과 남산골 공원이 조용히 숨어있는 동네",
     image_url: "/images/namsangol.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 3, 자연: 2 },
   },
 
   // ── 용산구 ────────────────────────────────────────────
@@ -99,6 +106,7 @@ export const regions: Region[] = [
     center_lng: 126.9653,
     description: "2030 여성이 키운 트렌디 상권, 이국 감성 식당 밀집",
     image_url: "/images/yongridangil.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 1, 자연: 1 },
   },
   {
     id: "ys-2",
@@ -111,6 +119,7 @@ export const regions: Region[] = [
     center_lng: 126.9712,
     description: "을지로와 이태원 사이, 조용히 뜨는 로컬 감성 동네",
     image_url: "/images/samgakji.jpg",
+    axes: { 에너지: 1, 힙함: 3, 문화감: 2, 자연: 1 },
   },
   {
     id: "ys-3",
@@ -123,6 +132,7 @@ export const regions: Region[] = [
     center_lng: 126.9826,
     description: "경사진 골목마다 숨겨진 카페와 바가 있는 언덕 동네",
     image_url: "/images/haebangchon.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 1, 자연: 1 },
   },
   {
     id: "ys-4",
@@ -135,6 +145,7 @@ export const regions: Region[] = [
     center_lng: 126.9745,
     description: "남산 아래 조용히 숨어있는 아는 사람만 아는 동네",
     image_url: "/images/huam.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 2, 자연: 1 },
   },
   {
     id: "ys-5",
@@ -147,6 +158,7 @@ export const regions: Region[] = [
     center_lng: 126.9939,
     description: "세계 각국의 음식과 문화가 공존하는 글로벌 동네",
     image_url: "/images/itaewon.jpg",
+    axes: { 에너지: 3, 힙함: 2, 문화감: 1, 자연: 1 },
   },
   {
     id: "ys-6",
@@ -159,6 +171,7 @@ export const regions: Region[] = [
     center_lng: 127.0033,
     description: "이태원 옆 조용히 숨어있는 로컬 카페 동네",
     image_url: "/images/bogwang.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 2, 자연: 1 },
   },
   {
     id: "ys-7",
@@ -171,6 +184,7 @@ export const regions: Region[] = [
     center_lng: 126.9972,
     description: "세련된 레스토랑과 갤러리가 모인 감각적인 거리",
     image_url: "/images/hannam.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 1, 자연: 1 },
   },
 
   // ── 마포구 ────────────────────────────────────────────
@@ -185,6 +199,7 @@ export const regions: Region[] = [
     center_lng: 126.9513,
     description: "직장인 맛집 성지, 다양한 한식과 로컬 분위기",
     image_url: "/images/gongdeok.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "mp-2",
@@ -197,6 +212,7 @@ export const regions: Region[] = [
     center_lng: 126.9257,
     description: "폐선 위에 조성된 선형 공원, 사계절 내내 걷기 좋은 길",
     image_url: "/images/gyeongui.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 2, 자연: 3 },
   },
   {
     id: "mp-3",
@@ -209,6 +225,7 @@ export const regions: Region[] = [
     center_lng: 126.9225,
     description: "클럽부터 갤러리까지, 젊음의 에너지가 넘치는 동네",
     image_url: "/images/hongdae.jpg",
+    axes: { 에너지: 3, 힙함: 2, 문화감: 1, 자연: 1 },
   },
   {
     id: "mp-4",
@@ -221,6 +238,7 @@ export const regions: Region[] = [
     center_lng: 126.9139,
     description: "홍대 옆 조용한 골목, 감성 카페와 맛집이 숨어있는 곳",
     image_url: "/images/hapjeong.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 2, 자연: 1 },
   },
   {
     id: "mp-5",
@@ -233,6 +251,7 @@ export const regions: Region[] = [
     center_lng: 126.9234,
     description: "경의선숲길 옆 아기자기한 카페 골목, 유럽 감성 동네",
     image_url: "/images/yeonnam.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 1, 자연: 1 },
   },
   {
     id: "mp-6",
@@ -245,6 +264,7 @@ export const regions: Region[] = [
     center_lng: 126.9080,
     description: "진짜 동네 사람들 사이에서 커피 마시는 기분이 나는 곳",
     image_url: "/images/mangwon.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 2, 자연: 1 },
   },
 
   // ── 서대문구 ──────────────────────────────────────────
@@ -259,6 +279,7 @@ export const regions: Region[] = [
     center_lng: 126.9321,
     description: "골목마다 숨겨진 맛집과 카페, 조용하고 세련된 주거 동네",
     image_url: "/images/yeonhui.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 2, 자연: 1 },
   },
   {
     id: "sd-2",
@@ -271,6 +292,7 @@ export const regions: Region[] = [
     center_lng: 126.9463,
     description: "관광객 없는 조용한 동네, 인왕산 아래 로컬 감성",
     image_url: "/images/hongje.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 2 },
   },
 
   // ── 은평구 ────────────────────────────────────────────
@@ -285,6 +307,7 @@ export const regions: Region[] = [
     center_lng: 126.9085,
     description: "북한산 자락 아래 은평 한옥마을과 자연이 공존하는 곳",
     image_url: "/images/jingwan.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 3, 자연: 3 },
   },
 
   // ── 종로구 ────────────────────────────────────────────
@@ -299,6 +322,7 @@ export const regions: Region[] = [
     center_lng: 126.9641,
     description: "인왕산 자락 아래 숨겨진 카페촌, 서울에서 가장 조용한 동네",
     image_url: "/images/buam.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 3, 자연: 2 },
   },
   {
     id: "jr-2",
@@ -311,6 +335,7 @@ export const regions: Region[] = [
     center_lng: 126.9714,
     description: "미술관과 갤러리가 모인 조용한 고급 주거 동네",
     image_url: "/images/pyeongchang.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 3, 자연: 3 },
   },
   {
     id: "jr-3",
@@ -323,6 +348,7 @@ export const regions: Region[] = [
     center_lng: 126.9710,
     description: "경복궁 옆 조용한 골목에 예술이 숨쉬는 마을",
     image_url: "/images/seochon.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 3, 자연: 1 },
   },
   {
     id: "jr-4",
@@ -335,6 +361,7 @@ export const regions: Region[] = [
     center_lng: 126.9850,
     description: "한옥마을의 고요한 아름다움을 느낄 수 있는 곳",
     image_url: "/images/bukchon.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 3, 자연: 1 },
   },
   {
     id: "jr-5",
@@ -347,6 +374,7 @@ export const regions: Region[] = [
     center_lng: 126.9872,
     description: "전통공예와 갤러리, 낙원상가가 어우러진 문화의 거리",
     image_url: "/images/insadong.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 3, 자연: 1 },
   },
   {
     id: "jr-6",
@@ -359,6 +387,7 @@ export const regions: Region[] = [
     center_lng: 126.9870,
     description: "한옥과 현대가 만나는 레트로 감성의 거리",
     image_url: "/images/ikson.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 3, 자연: 1 },
   },
   {
     id: "jr-7",
@@ -371,6 +400,7 @@ export const regions: Region[] = [
     center_lng: 126.9950,
     description: "종묘와 창덕궁을 잇는 조용하고 아름다운 역사 산책로",
     image_url: "/images/seosunra.jpg",
+    axes: { 에너지: 3, 힙함: 2, 문화감: 3, 자연: 2 },
   },
   {
     id: "jr-8",
@@ -383,6 +413,7 @@ export const regions: Region[] = [
     center_lng: 126.9812,
     description: "북악산 자락 아래 갤러리와 감성 카페가 이어지는 거리",
     image_url: "/images/samcheong.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 3, 자연: 2 },
   },
   {
     id: "jr-9",
@@ -395,6 +426,7 @@ export const regions: Region[] = [
     center_lng: 126.9825,
     description: "청진동 해장국 골목부터 젊은 감성 카페까지 공존하는 곳",
     image_url: "/images/jonggak.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "jr-10",
@@ -407,6 +439,7 @@ export const regions: Region[] = [
     center_lng: 126.9995,
     description: "빈대떡과 마약김밥, 100년 넘은 전통 재래시장의 맛",
     image_url: "/images/gwangjang.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 3, 자연: 1 },
   },
   {
     id: "jr-11",
@@ -419,6 +452,7 @@ export const regions: Region[] = [
     center_lng: 127.0020,
     description: "낙산 성곽길과 대학로 문화가 공존하는 낭만적인 언덕 동네",
     image_url: "/images/hyehwa.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 2, 자연: 2 },
   },
   {
     id: "jr-12",
@@ -431,6 +465,7 @@ export const regions: Region[] = [
     center_lng: 127.0138,
     description: "봉제 골목과 절벽뷰가 공존하는 서울의 숨은 동네",
     image_url: "/images/changsin.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 3, 자연: 1 },
   },
 
   // ── 성북구 ────────────────────────────────────────────
@@ -445,6 +480,7 @@ export const regions: Region[] = [
     center_lng: 127.0046,
     description: "미술관과 고택이 숨어있는 조용하고 예술적인 동네",
     image_url: "/images/seongbuk.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 3, 자연: 2 },
   },
 
   // ── 강북구 ────────────────────────────────────────────
@@ -459,6 +495,7 @@ export const regions: Region[] = [
     center_lng: 127.0118,
     description: "북한산 등산 입구, 도심에서 가장 가까운 자연 트레킹 코스",
     image_url: "/images/bukhansan.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 
   // ── 도봉구 ────────────────────────────────────────────
@@ -473,6 +510,7 @@ export const regions: Region[] = [
     center_lng: 127.0449,
     description: "도봉산 등산과 방학천 산책, 자연 속 힐링 코스",
     image_url: "/images/dobongsan.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 
   // ── 노원구 ────────────────────────────────────────────
@@ -487,6 +525,7 @@ export const regions: Region[] = [
     center_lng: 127.0985,
     description: "폐역을 공원으로 만든 경춘선 숲길, 조용하고 낭만적인 산책로",
     image_url: "/images/gyeongchun.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 3, 자연: 3 },
   },
 
   // ── 동대문구 ──────────────────────────────────────────
@@ -501,6 +540,7 @@ export const regions: Region[] = [
     center_lng: 127.0579,
     description: "경희대·한예종 앞 대학가, 저렴하고 개성 있는 맛집 골목",
     image_url: "/images/hoegi.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "dd-2",
@@ -513,6 +553,7 @@ export const regions: Region[] = [
     center_lng: 127.0473,
     description: "청량리 588 역사를 품고 빠르게 변화 중인 동네",
     image_url: "/images/cheongnyangni.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 1 },
   },
 
   // ── 중랑구 ────────────────────────────────────────────
@@ -527,6 +568,7 @@ export const regions: Region[] = [
     center_lng: 127.0952,
     description: "중랑천 벚꽃길과 망우리 역사공원, 조용한 산책 코스",
     image_url: "/images/jungnang.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 
   // ── 성동구 ────────────────────────────────────────────
@@ -541,6 +583,7 @@ export const regions: Region[] = [
     center_lng: 127.0373,
     description: "곱창 골목과 실내포차, 직장인과 대학생이 섞이는 동네",
     image_url: "/images/wangsimni.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "sdo-2",
@@ -553,6 +596,7 @@ export const regions: Region[] = [
     center_lng: 127.0377,
     description: "도심 속 대형 공원, 사슴과 함께하는 힐링 산책",
     image_url: "/images/seoulforest.jpg",
+    axes: { 에너지: 3, 힙함: 2, 문화감: 2, 자연: 3 },
   },
   {
     id: "sdo-3",
@@ -565,6 +609,7 @@ export const regions: Region[] = [
     center_lng: 127.0560,
     description: "팝업 성지, 공장을 개조한 카페와 갤러리가 가득한 서울의 브루클린",
     image_url: "/images/seongsu.jpg",
+    axes: { 에너지: 3, 힙함: 3, 문화감: 2, 자연: 1 },
   },
   {
     id: "sdo-4",
@@ -577,6 +622,7 @@ export const regions: Region[] = [
     center_lng: 127.0667,
     description: "한강 바로 옆 뚝섬유원지, 피크닉과 카페가 어우러지는 곳",
     image_url: "/images/ttukseom.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 
   // ── 광진구 ────────────────────────────────────────────
@@ -591,6 +637,7 @@ export const regions: Region[] = [
     center_lng: 127.0704,
     description: "젊음의 에너지가 넘치는 대학가, 맛집과 카페가 밀집",
     image_url: "/images/konkuk.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 2, 자연: 1 },
   },
 
   // ── 강동구 ────────────────────────────────────────────
@@ -605,6 +652,7 @@ export const regions: Region[] = [
     center_lng: 127.1432,
     description: "암사 선사유적지와 한강공원이 이어지는 조용한 동쪽 코스",
     image_url: "/images/amsa.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 
   // ── 송파구 ────────────────────────────────────────────
@@ -619,6 +667,7 @@ export const regions: Region[] = [
     center_lng: 127.1004,
     description: "롯데월드타워부터 석촌호수까지, 즐길 거리가 가득한 핵심 상권",
     image_url: "/images/jamsil.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 1, 자연: 2 },
   },
   {
     id: "sp-2",
@@ -631,6 +680,7 @@ export const regions: Region[] = [
     center_lng: 127.1026,
     description: "석촌호수 옆 감성 카페와 맛집이 늘어선 핫한 골목",
     image_url: "/images/songridangil.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 2, 자연: 1 },
   },
 
   // ── 강남구 ────────────────────────────────────────────
@@ -645,6 +695,7 @@ export const regions: Region[] = [
     center_lng: 127.0480,
     description: "직장인 맛집 격전지, 퇴근 후 가볍게 즐기는 강남 핫플",
     image_url: "/images/seolleung.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 1 },
   },
   {
     id: "gn-2",
@@ -657,6 +708,7 @@ export const regions: Region[] = [
     center_lng: 127.0300,
     description: "패션과 뷰티의 메카, 세련된 편집숍과 레스토랑이 집결",
     image_url: "/images/apgujeong.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 1, 자연: 1 },
   },
   {
     id: "gn-3",
@@ -669,6 +721,7 @@ export const regions: Region[] = [
     center_lng: 127.0276,
     description: "유동인구 1위, 쇼핑과 맛집이 밀집된 강남의 중심",
     image_url: "/images/gangnamstation.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 1, 자연: 1 },
   },
   {
     id: "gn-4",
@@ -681,6 +734,7 @@ export const regions: Region[] = [
     center_lng: 127.0268,
     description: "조용한 주택가 골목에 숨어있는 세련된 레스토랑과 카페",
     image_url: "/images/nonhyeon.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 2, 자연: 1 },
   },
   {
     id: "gn-5",
@@ -693,6 +747,7 @@ export const regions: Region[] = [
     center_lng: 127.0200,
     description: "가로수 사이 편집숍과 카페, 걷기 좋은 세련된 거리",
     image_url: "/images/garosu.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 2, 자연: 1 },
   },
   {
     id: "gn-6",
@@ -705,6 +760,7 @@ export const regions: Region[] = [
     center_lng: 127.0602,
     description: "코엑스 옆 봉은사, 도심 속 사찰에서 즐기는 조용한 산책",
     image_url: "/images/bongeunsa.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 3, 자연: 2 },
   },
 
   // ── 서초구 ────────────────────────────────────────────
@@ -719,6 +775,7 @@ export const regions: Region[] = [
     center_lng: 127.0340,
     description: "양재천을 따라 걷는 조용한 힐링 산책 코스",
     image_url: "/images/yangjae.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 3 },
   },
   {
     id: "sc-2",
@@ -731,6 +788,7 @@ export const regions: Region[] = [
     center_lng: 126.9976,
     description: "한강 야경과 서래마을 프렌치 감성이 어우러지는 낭만 코스",
     image_url: "/images/banpo.jpg",
+    axes: { 에너지: 2, 힙함: 2, 문화감: 1, 자연: 3 },
   },
 
   // ── 동작구 ────────────────────────────────────────────
@@ -745,6 +803,7 @@ export const regions: Region[] = [
     center_lng: 126.9437,
     description: "새벽부터 열리는 수산시장, 횟집과 로컬 맛집이 즐비한 곳",
     image_url: "/images/noryangjin.jpg",
+    axes: { 에너지: 2, 힙함: 1, 문화감: 2, 자연: 1 },
   },
 
   // ── 영등포구 ──────────────────────────────────────────
@@ -759,6 +818,7 @@ export const regions: Region[] = [
     center_lng: 126.8999,
     description: "철공소 골목에 예술가들이 들어와 탄생한 독특한 창작촌",
     image_url: "/images/mullae.jpg",
+    axes: { 에너지: 2, 힙함: 3, 문화감: 3, 자연: 1 },
   },
   {
     id: "yd-2",
@@ -771,6 +831,7 @@ export const regions: Region[] = [
     center_lng: 126.9245,
     description: "한강공원과 윤중로 벚꽃길, 봄 시즌 서울 최고의 나들이 코스",
     image_url: "/images/yeouido.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 2, 자연: 2 },
   },
   {
     id: "yd-3",
@@ -783,6 +844,7 @@ export const regions: Region[] = [
     center_lng: 126.9010,
     description: "합정과 영등포 사이, 아직 덜 알려진 로컬 카페 동네",
     image_url: "/images/dangsan.jpg",
+    axes: { 에너지: 1, 힙함: 1, 문화감: 2, 자연: 1 },
   },
 
   // ── 구로구 ────────────────────────────────────────────
@@ -797,6 +859,7 @@ export const regions: Region[] = [
     center_lng: 126.8933,
     description: "중국·조선족 문화가 살아있는 서울 속 이국 먹거리 골목",
     image_url: "/images/daelim.jpg",
+    axes: { 에너지: 1, 힙함: 2, 문화감: 1, 자연: 1 },
   },
 
   // ── 강서구 ────────────────────────────────────────────
@@ -811,5 +874,6 @@ export const regions: Region[] = [
     center_lng: 126.8318,
     description: "서울식물원과 마곡 신도시, 도심 속 자연과 세련됨이 공존",
     image_url: "/images/magok.jpg",
+    axes: { 에너지: 3, 힙함: 1, 문화감: 2, 자연: 3 },
   },
 ];
