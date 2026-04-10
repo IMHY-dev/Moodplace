@@ -6,11 +6,11 @@ import { recommendRegions } from "@/lib/recommend";
 import type { Companion, Activity } from "@/lib/types";
 
 const ACTIVITY_LABEL: Record<Activity, string> = {
-  걷기: "🚶 걷기",
-  카페: "☕ 카페",
-  맛집: "🍽 맛집",
-  쇼핑: "🛍 쇼핑",
-  문화: "🎨 문화",
+  걷기:     "🌿 걷기",
+  "카페/맛집": "☕ 카페/맛집",
+  쇼핑:     "🛍 쇼핑",
+  유적지:   "🏯 유적지",
+  예술:     "🎨 예술",
 };
 
 const COMPANION_LABEL: Record<Companion, string> = {
@@ -24,14 +24,17 @@ function RecommendContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const companion = searchParams.get("companion") as Companion | null;
-  const activity  = searchParams.get("activity")  as Activity  | null;
-  const query     = searchParams.get("query") ?? "";
+  const companion  = searchParams.get("companion") as Companion | null;
+  const activitiesParam = searchParams.get("activities") ?? "";
+  const activities = activitiesParam
+    ? (activitiesParam.split(",") as Activity[])
+    : [];
+  const query = searchParams.get("query") ?? "";
 
-  const regions = useMemo(() => {
-    if (!companion || !activity) return [];
-    return recommendRegions(companion, activity, query, 3);
-  }, [companion, activity, query]);
+  const results = useMemo(() => {
+    if (!companion) return [];
+    return recommendRegions(companion, activities, query, 3);
+  }, [companion, activitiesParam, query]);
 
   const handleRegionClick = (regionName: string, lat: number, lng: number) => {
     const params = new URLSearchParams({
@@ -42,7 +45,7 @@ function RecommendContent() {
     router.push(`/places?${params.toString()}`);
   };
 
-  if (!companion || !activity) {
+  if (!companion) {
     return (
       <main className="flex flex-1 flex-col items-center justify-center px-6">
         <p className="text-zinc-500 mb-6">잘못된 접근이에요.</p>
@@ -56,7 +59,7 @@ function RecommendContent() {
     );
   }
 
-  if (regions.length === 0) {
+  if (results.length === 0) {
     return (
       <main className="flex flex-1 flex-col items-center justify-center px-6">
         <p className="text-zinc-500 mb-2">딱 맞는 동네를 아직 못 찾았어요.</p>
@@ -79,9 +82,11 @@ function RecommendContent() {
           <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
             {COMPANION_LABEL[companion]}
           </span>
-          <span className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
-            {ACTIVITY_LABEL[activity]}
-          </span>
+          {activities.map((a) => (
+            <span key={a} className="text-xs px-3 py-1.5 bg-black text-white rounded-full">
+              {ACTIVITY_LABEL[a]}
+            </span>
+          ))}
           {query && (
             <span className="text-xs px-3 py-1.5 bg-zinc-700 text-white rounded-full">
               ✨ {query}
@@ -91,20 +96,16 @@ function RecommendContent() {
 
         <h2 className="text-2xl font-bold mb-6">이런 동네는 어때요?</h2>
 
-        {/* 지역 카드 */}
         <div className="flex flex-col gap-4">
-          {regions.map((region, i) => (
+          {results.map((region, i) => (
             <button
               key={region.id}
-              onClick={() =>
-                handleRegionClick(region.name, region.center_lat, region.center_lng)
-              }
+              onClick={() => handleRegionClick(region.name, region.center_lat, region.center_lng)}
               className="group relative w-full h-48 rounded-2xl overflow-hidden text-left border-2 border-transparent hover:border-black transition-all"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-zinc-700 to-zinc-950" />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
 
-              {/* 순위 */}
               <div className="absolute top-4 left-4 z-10">
                 <span className="text-xs font-bold text-white/60">#{i + 1}</span>
               </div>
@@ -114,10 +115,7 @@ function RecommendContent() {
                 <p className="text-sm text-white/75">{region.description}</p>
                 <div className="flex gap-1.5 mt-3 flex-wrap">
                   {region.mood_tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-0.5 bg-white/20 rounded-full"
-                    >
+                    <span key={tag} className="text-xs px-2 py-0.5 bg-white/20 rounded-full">
                       {tag}
                     </span>
                   ))}
@@ -142,13 +140,11 @@ function RecommendContent() {
 
 export default function RecommendPage() {
   return (
-    <Suspense
-      fallback={
-        <main className="flex flex-1 items-center justify-center">
-          <p className="text-zinc-400">로딩 중...</p>
-        </main>
-      }
-    >
+    <Suspense fallback={
+      <main className="flex flex-1 items-center justify-center">
+        <p className="text-zinc-400">로딩 중...</p>
+      </main>
+    }>
       <RecommendContent />
     </Suspense>
   );

@@ -6,8 +6,8 @@ export type Vibe =
   | "분위기있는데"
   | "이국감성";
 
-// C: 유저가 원하는 행위
-export type Activity = "걷기" | "카페" | "맛집" | "쇼핑" | "문화";
+// C: 유저가 원하는 행위 (다중 선택 가능)
+export type Activity = "걷기" | "카페/맛집" | "쇼핑" | "유적지" | "예술";
 
 // A: 동행자
 export type Companion = "혼자" | "연인" | "친구" | "부모님";
@@ -24,7 +24,6 @@ export interface Region {
   name: string;
   mood_tags: string[];
   vibes: Vibe[];
-  activities: Activity[];
   companions: Companion[];
   center_lat: number;
   center_lng: number;

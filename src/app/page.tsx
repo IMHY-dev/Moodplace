@@ -12,23 +12,17 @@ const COMPANIONS: { value: Companion; label: string; emoji: string }[] = [
 ];
 
 const ACTIVITIES: { value: Activity; label: string; emoji: string }[] = [
-  { value: "걷기", label: "걷고 싶어",     emoji: "🚶" },
-  { value: "카페", label: "카페",           emoji: "☕" },
-  { value: "맛집", label: "맛집",           emoji: "🍽" },
-  { value: "쇼핑", label: "쇼핑",           emoji: "🛍" },
-  { value: "문화", label: "문화 경험",       emoji: "🎨" },
+  { value: "걷기",    label: "걷기",    emoji: "🌿" },
+  { value: "카페/맛집", label: "카페/맛집", emoji: "☕" },
+  { value: "쇼핑",   label: "쇼핑",    emoji: "🛍" },
+  { value: "유적지",  label: "유적지",  emoji: "🏯" },
+  { value: "예술",   label: "예술",    emoji: "🎨" },
 ];
 
 function Chip({
-  emoji,
-  label,
-  selected,
-  onClick,
+  emoji, label, selected, onClick,
 }: {
-  emoji: string;
-  label: string;
-  selected: boolean;
-  onClick: () => void;
+  emoji: string; label: string; selected: boolean; onClick: () => void;
 }) {
   return (
     <button
@@ -47,15 +41,21 @@ function Chip({
 
 export default function MoodInputPage() {
   const router = useRouter();
-  const [query, setQuery] = useState("");
+  const [query, setQuery]       = useState("");
   const [companion, setCompanion] = useState<Companion | null>(null);
-  const [activity, setActivity] = useState<Activity | null>(null);
+  const [activities, setActivities] = useState<Activity[]>([]);
 
-  const canSubmit = companion && activity;
+  const toggleActivity = (a: Activity) =>
+    setActivities((prev) =>
+      prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]
+    );
+
+  const canSubmit = !!companion;
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    const params = new URLSearchParams({ companion, activity });
+    const params = new URLSearchParams({ companion });
+    if (activities.length > 0) params.set("activities", activities.join(","));
     if (query.trim()) params.set("query", query.trim());
     router.push(`/recommend?${params.toString()}`);
   };
@@ -102,19 +102,20 @@ export default function MoodInputPage() {
           </div>
         </div>
 
-        {/* C: 뭐 하고 싶어 */}
+        {/* C: 뭐 하고 싶어 (다중 선택) */}
         <div className="mb-10">
-          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-1">
             뭐 하고 싶어
           </p>
+          <p className="text-xs text-zinc-400 mb-3">여러 개 선택 가능 · 선택 안 해도 돼요</p>
           <div className="flex flex-wrap gap-2">
             {ACTIVITIES.map((a) => (
               <Chip
                 key={a.value}
                 emoji={a.emoji}
                 label={a.label}
-                selected={activity === a.value}
-                onClick={() => setActivity(activity === a.value ? null : a.value)}
+                selected={activities.includes(a.value)}
+                onClick={() => toggleActivity(a.value)}
               />
             ))}
           </div>
