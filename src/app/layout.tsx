@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Noto_Serif_KR } from "next/font/google";
 import "./globals.css";
+
+const notoSerifKR = Noto_Serif_KR({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-noto-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "MoodPlace - 느낌으로 찾는 나만의 장소",
@@ -14,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full">
+    <html lang="ko" className={`h-full ${notoSerifKR.variable}`}>
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <Script

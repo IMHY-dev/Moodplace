@@ -64,14 +64,19 @@ export default function MoodInputPage() {
     <main className="flex flex-1 flex-col items-center justify-center px-6 py-12">
       <div className="w-full max-w-lg">
         {/* 헤더 */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">MoodPlace</h1>
-          <p className="text-zinc-500">오늘 어떤 서울을 원해요?</p>
+        <div className="text-center mb-12">
+          <h1 className="font-serif text-4xl text-zinc-900 tracking-tight mb-3">
+            MoodPlace
+          </h1>
+          <div className="w-8 h-px bg-zinc-300 mx-auto mb-3" />
+          <p className="text-sm text-zinc-400 tracking-wide">
+            오늘 어떤 서울을 원해요?
+          </p>
         </div>
 
         {/* B: 느낌 자유 입력 */}
         <div className="mb-10">
-          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+          <p className="text-[10px] text-zinc-400 tracking-[0.2em] uppercase mb-3">
             어떤 느낌
           </p>
           <input
@@ -86,7 +91,7 @@ export default function MoodInputPage() {
 
         {/* A: 누구랑 */}
         <div className="mb-8">
-          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-3">
+          <p className="text-[10px] text-zinc-400 tracking-[0.2em] uppercase mb-3">
             누구랑
           </p>
           <div className="flex flex-wrap gap-2">
@@ -104,7 +109,7 @@ export default function MoodInputPage() {
 
         {/* C: 뭐 하고 싶어 (다중 선택) */}
         <div className="mb-10">
-          <p className="text-sm font-semibold text-zinc-400 uppercase tracking-widest mb-1">
+          <p className="text-[10px] text-zinc-400 tracking-[0.2em] uppercase mb-1">
             뭐 하고 싶어
           </p>
           <p className="text-xs text-zinc-400 mb-3">여러 개 선택 가능 · 선택 안 해도 돼요</p>
